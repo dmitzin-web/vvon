@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
-import { faqs, vvon } from "@/lib/vvon/config";
+import { vvon } from "@/lib/vvon/config";
 import { buildMetadata } from "@/lib/seo";
 import {
   faqJsonLd,
@@ -9,153 +9,122 @@ import {
   websiteJsonLd,
 } from "@/lib/jsonld";
 
+// ---------------------------------------------------------------------------
+// Vvon™ home — "Forensic Indigo, refined".
+//
+// Visual register: Linear × Anthropic × Stripe × Palantir. Dark hero with
+// huge restrained typography, a real-UI evidence-engine mockup as the
+// hero of the page (product, not marketing), hairline precision, indigo
+// only where it carries weight. Mono for filenames and metadata.
+//
+// What this is NOT: generic SaaS, glassmorphism, big gradients, rounded
+// bubbles, AI stock imagery, neon cyberpunk, illustrations of robots.
+// ---------------------------------------------------------------------------
+
 export const metadata: Metadata = buildMetadata({
-  title: "Vvon™ — AI forensic analysis for property-insurance estimates",
-  description: vvon.shortDescription,
+  title: "Vvon™ — Forensic estimate analysis for property-insurance claims",
+  description:
+    "AI-assisted forensic review of property-insurance estimates, photos, policies, and denial letters. Built for restoration contractors, public adjusters, and estimators.",
   path: "/",
   image: "/opengraph-image",
   keywords: [
-    "insurance estimate review",
-    "claim document analysis",
-    "missing scope insurance",
-    "supplement estimate review",
-    "AI claim review",
-    "Xactimate review",
-    "property damage claim",
     "forensic estimate analysis",
+    "AI claim review",
+    "insurance estimate review",
+    "Xactimate review",
+    "supplement opportunity",
+    "missing scope",
+    "carrier consistency",
   ],
 });
 
-// ---------------------------------------------------------------------------
-// Vvon™ home page — "Forensic Indigo" design system.
-//
-// Sections (top → bottom):
-//   1. Hero       — dark, full-bleed, big display, dual CTA
-//   2. Trust strip — 4 quick metrics in mono
-//   3. Problem     — what carrier estimates routinely miss
-//   4. How it works — 4-step process
-//   5. What it does — feature grid (8 cards, hairline, no shadow)
-//   6. Categories   — 4 analysis lenses with pill labels
-//   7. Sample CTA   — pointer to /report
-//   8. FAQ          — disclosure pattern
-//   9. Final CTA    — dark band → /upload
-// ---------------------------------------------------------------------------
-
-const features = [
+const faqs = [
   {
-    title: "Scope gap detection",
-    body: "Surfaces line items that may be missing or under-scoped relative to the documented loss.",
+    q: "Is Vvon™ a public adjuster?",
+    a: "No. Vvon™ provides informational document and estimate analysis only. It does not negotiate with carriers, represent you, or adjust your claim.",
   },
   {
-    title: "Dependency logic",
-    body: "Flags connected work that becomes required when one item is approved or removed.",
+    q: "Does Vvon™ guarantee a higher settlement?",
+    a: "No. The platform identifies possible scope gaps and documentation deficiencies. Claim outcomes depend on policy terms, evidence, carrier review, and applicable state law.",
   },
   {
-    title: "Mitigation review",
-    body: "Reads water, mold, smoke, fire and emergency-service scope for consistency and completeness.",
+    q: "What documents should I upload?",
+    a: "Carrier estimate, contractor estimate, photos, policy, denial letter, mitigation invoice, and any claim correspondence. The more complete the file, the higher the evidentiary confidence on each finding.",
   },
   {
-    title: "Policy & denial reading",
-    body: "Highlights relevant policy language, exclusions, limitations and stated denial reasoning.",
+    q: "Can contractors and public adjusters use it?",
+    a: "Yes. Vvon™ is designed as a second-pass scope review for IICRC-certified restoration contractors, public adjusters, attorneys, and estimators. The output format is built for professional review.",
   },
   {
-    title: "Photo-to-scope mapping",
-    body: "Connects visible damage in your photos to the scope items that typically follow.",
-  },
-  {
-    title: "Carrier consistency",
-    body: "Cross-checks what the carrier approved against what the same logic implies elsewhere.",
-  },
-  {
-    title: "Evidence checklist",
-    body: "Tells you what documentation — photos, measurements, readings, invoices — to gather next.",
-  },
-  {
-    title: "Structured report",
-    body: "Severity-ranked findings, confidence levels, and clarification questions you can use directly.",
+    q: "Is Xactimate-format compatible?",
+    a: "Yes. Vvon™ reads Xactimate-format estimates as text PDFs. Native ESX (Xactimate XML) parsing is on the roadmap for higher-fidelity quantity analysis.",
   },
 ];
 
-const categories = [
+const findingTypes = [
   {
-    title: "Repair scope",
-    items: ["Drywall", "Texture", "Paint", "Flooring", "Baseboards", "Cabinetry", "Tile", "Insulation", "Trim"],
+    title: "Missing scope",
+    detail: "Detach/reset approved without corresponding finish restoration on the same room.",
   },
   {
-    title: "Mitigation scope",
-    items: ["Water extraction", "Drying", "Containment", "HEPA filtration", "Demolition", "Antimicrobial", "Mold remediation"],
+    title: "Pricing inconsistencies",
+    detail: "Same operation priced differently across rooms with the same conditions.",
   },
   {
-    title: "Estimate logic",
-    items: ["Quantities", "Waste factors", "Labor minimums", "Detach/reset", "Trade sequencing", "Overhead", "Final cleaning"],
+    title: "Quantity mismatches",
+    detail: "Wall area on line item does not match the photographed affected elevation.",
   },
   {
-    title: "Claim documents",
-    items: ["Policy", "Denial letter", "Carrier estimate", "Contractor estimate", "Photos", "Matterport", "Adjuster notes"],
-  },
-];
-
-const howItWorks = [
-  {
-    n: "01",
-    title: "Upload documents",
-    body: "Carrier estimate, contractor estimate, photos, policy, denial letter, mitigation invoice, or notes.",
+    title: "Drying protocol conflicts",
+    detail: "Mitigation invoice equipment days not tied to specific rooms or moisture readings.",
   },
   {
-    n: "02",
-    title: "AI forensic review",
-    body: "Senior-estimator-level reasoning — line-item logic, quantity consistency, trade sequencing, carrier-consistency cross-checks.",
+    title: "Continuous flooring mismatch",
+    detail: "Partial flooring replacement on a continuous-material plan without seam justification.",
   },
   {
-    n: "03",
-    title: "Structured report",
-    body: "Forensic findings, severity, evidentiary confidence, and a clarification request you can put to the carrier.",
+    title: "Texture / finish blending gaps",
+    detail: "Drywall patch on textured wall without matching texture line item.",
   },
   {
-    n: "04",
-    title: "Action packet",
-    body: "Clean summary to share with the carrier, contractor, or a licensed claim professional.",
+    title: "Carrier-consistency violations",
+    detail: "Approved upstream operations imply downstream scope that isn't itemised.",
+  },
+  {
+    title: "Unsupported denials",
+    detail: "Denial cites policy provisions that the uploaded policy form does not actually contain.",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* 1. HERO — dark, full bleed, indigo glow */}
-      <section className="relative overflow-hidden bg-bg-dark text-fg-on-dark">
-        {/* Indigo radial glow — top-right */}
+      {/* ──────────────────────────────────────────────────────────────
+          1 · HERO — near-black, restrained, typography-first
+          ────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-bg-dark text-fg-on-dark">
+        {/* One very subtle indigo wash — no glow, no particles. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-32 right-0 h-[700px] w-[700px] bg-[radial-gradient(circle,rgba(79,70,229,0.18)_0%,rgba(79,70,229,0)_60%)]"
-        />
-        {/* Subtle grid texture */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-fade/30 to-transparent"
         />
 
-        <div className="relative mx-auto max-w-6xl px-6 pt-20 pb-24 lg:px-10 lg:pt-28 lg:pb-32">
+        <div className="relative mx-auto max-w-6xl px-6 pt-24 pb-28 lg:px-10 lg:pt-32 lg:pb-36">
           <p className="eyebrow text-accent-fade">
-            Vvon™ · Forensic estimate analysis
+            Vvon™ · Forensic estimate review
           </p>
 
-          <h1 className="display mt-10 max-w-4xl text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-            Find what your insurance
-            <br />
-            estimate is{" "}
-            <span className="text-accent-fade">missing</span>.
+          <h1 className="display mt-12 max-w-4xl text-5xl leading-[0.98] sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
+            Find what the<br />carrier <span className="text-accent-fade">missed</span>.
           </h1>
 
-          <p className="mt-10 max-w-2xl text-lg leading-relaxed text-fg-on-dark-muted">
-            {vvon.shortDescription}
+          <p className="mt-10 max-w-xl text-lg leading-relaxed text-fg-on-dark-muted">
+            AI-assisted forensic review for restoration estimates,
+            mitigation invoices, photos, policies, and denial letters.
+            Cited findings, calibrated confidence, professional output.
           </p>
 
-          <div className="mt-12 flex flex-wrap items-center gap-4">
+          <div className="mt-12 flex flex-wrap items-center gap-6">
             <Link
               href="/upload"
               className="inline-flex items-center gap-3 border border-accent bg-accent px-7 py-4 text-xs font-medium uppercase tracking-[0.16em] text-fg-on-dark transition hover:bg-accent-hover"
@@ -165,112 +134,264 @@ export default function HomePage() {
             </Link>
             <Link
               href="/report"
-              className="inline-flex items-center gap-3 border border-border-on-dark-strong bg-transparent px-7 py-4 text-xs font-medium uppercase tracking-[0.16em] text-fg-on-dark transition hover:border-fg-on-dark"
+              className="text-xs uppercase tracking-[0.16em] text-fg-on-dark-muted transition hover:text-fg-on-dark"
             >
-              See sample report
+              See a sample report →
             </Link>
           </div>
         </div>
+      </section>
 
-        {/* Trust strip — mono metrics */}
-        <div className="relative border-t border-border-on-dark">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-border-on-dark lg:grid-cols-4">
+      {/* ──────────────────────────────────────────────────────────────
+          2 · LIVE ANALYSIS — the product is the hero
+          A real-UI mockup of an in-progress evidence review. Rendered
+          natively in HTML (no images), looks like a real screenshot of
+          the report tool. This is what visitors see before they read
+          marketing copy.
+          ────────────────────────────────────────────────────────────── */}
+      <section className="border-t border-border-on-dark bg-bg">
+        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <p className="eyebrow text-accent">The output</p>
+              <h2 className="display mt-6 text-4xl leading-[1.05] sm:text-5xl">
+                Every finding cited. Every confidence honest.
+              </h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-fg-muted">
+                The report reads like a senior IICRC desk review.
+                Findings are tied to specific document line items, severity
+                is calibrated, and clarification requests are phrased as
+                professional questions — never accusations.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7">
+              {/* Mock evidence UI — visually a "screenshot" of the
+                  product, but rendered as native HTML. Three columns on
+                  large screens, stacks on mobile. */}
+              <div className="overflow-hidden border border-border bg-bg">
+                {/* Window chrome */}
+                <div className="flex items-center justify-between border-b border-border bg-bg-subtle px-4 py-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-border-strong" />
+                    <span className="h-2 w-2 rounded-full bg-border-strong" />
+                    <span className="h-2 w-2 rounded-full bg-border-strong" />
+                  </div>
+                  <p className="mono text-[10px] uppercase tracking-[0.18em] text-fg-subtle">
+                    Claim 9a7f · Forensic review
+                  </p>
+                  <span className="mono text-[10px] uppercase tracking-[0.18em] text-fg-subtle">
+                    Live
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-12">
+                  {/* Sources column */}
+                  <aside className="border-b border-border md:col-span-4 md:border-b-0 md:border-r">
+                    <p className="eyebrow border-b border-border bg-bg-subtle px-4 py-3 text-fg-subtle">
+                      Sources
+                    </p>
+                    <ul className="text-xs">
+                      {[
+                        { name: "Carrier_Estimate.pdf", meta: "12,840 words", active: true },
+                        { name: "Contractor_Estimate.pdf", meta: "8,420 words" },
+                        { name: "Kitchen_Photos.jpg", meta: "Image · 2.1 MB" },
+                        { name: "Policy_HO3.pdf", meta: "24,500 words" },
+                        { name: "Denial_Letter.pdf", meta: "1,240 words" },
+                      ].map((doc) => (
+                        <li
+                          key={doc.name}
+                          className={`border-b border-border px-4 py-3 ${
+                            doc.active ? "bg-accent-bg" : ""
+                          }`}
+                        >
+                          <p
+                            className={`mono truncate ${
+                              doc.active ? "text-accent" : "text-fg"
+                            }`}
+                          >
+                            {doc.name}
+                          </p>
+                          <p className="mono mt-1 text-[10px] text-fg-subtle">
+                            {doc.meta}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </aside>
+
+                  {/* Selected finding — the centerpiece */}
+                  <div className="md:col-span-8">
+                    <div className="border-b border-border bg-bg-subtle px-5 py-3">
+                      <div className="flex items-center justify-between gap-4">
+                        <p className="eyebrow text-fg-subtle">
+                          Finding 04 of 11
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <span className="mono inline-flex items-center gap-1.5 border border-severity-high/40 bg-severity-high/5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-severity-high">
+                            <span className="h-1.5 w-1.5 rounded-full bg-severity-high" />
+                            High concern
+                          </span>
+                          <span className="mono text-[10px] uppercase tracking-[0.14em] text-fg-subtle">
+                            Likely
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="px-5 py-6">
+                      <h3 className="text-base font-medium leading-snug text-fg">
+                        Detach/reset approved without corresponding finish
+                        restoration on the same room scope
+                      </h3>
+
+                      <p className="mt-4 text-sm leading-[1.7] text-fg-muted">
+                        Carrier estimate approves detach/reset operations
+                        for baseboards in the Kitchen and adjacent Hallway,
+                        which recognises trim disturbance during the
+                        rebuild sequence. However, related finish-restoration
+                        operations <span className="text-fg">(caulk reset, nail-fill, localised paint touch-up)</span> are not itemised in the same room scopes.
+                      </p>
+
+                      <div className="mt-6 grid gap-px border border-border bg-border sm:grid-cols-2">
+                        <div className="bg-bg p-4">
+                          <p className="eyebrow text-fg-subtle">Cited in</p>
+                          <p className="mono mt-2 text-[11px] leading-relaxed text-fg">
+                            Carrier_Estimate.pdf
+                          </p>
+                          <p className="mono text-[11px] leading-relaxed text-fg-muted">
+                            Room: Kitchen · Line 14
+                          </p>
+                          <p className="mono text-[11px] leading-relaxed text-fg-muted">
+                            R&R Baseboard — detach &amp; reset
+                          </p>
+                        </div>
+                        <div className="bg-bg p-4">
+                          <p className="eyebrow text-fg-subtle">
+                            Evidence needed
+                          </p>
+                          <p className="mt-2 text-[11px] leading-relaxed text-fg-muted">
+                            Photos of baseboard transitions after reset;
+                            contractor scope confirmation on whether
+                            finish restoration was assumed.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 border-l-2 border-accent bg-accent-bg/40 px-4 py-3">
+                        <p className="eyebrow text-accent">
+                          Clarification request
+                        </p>
+                        <p className="mt-2 text-sm leading-[1.6] text-fg">
+                          Could you clarify whether caulk reset and
+                          localised paint touch-up at the wall-to-trim
+                          transition were considered as part of the
+                          detach/reset operation, or assumed to be
+                          priced separately?
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Pagination strip */}
+                    <div className="flex items-center justify-between border-t border-border bg-bg-subtle px-5 py-2.5">
+                      <p className="mono text-[10px] uppercase tracking-[0.14em] text-fg-subtle">
+                        ← 03 of 11
+                      </p>
+                      <div className="mono flex items-center gap-1.5 text-[10px] text-fg-subtle">
+                        <span className="h-1 w-1 rounded-full bg-severity-critical" />
+                        <span className="h-1 w-1 rounded-full bg-severity-high" />
+                        <span className="h-1 w-1 rounded-full bg-accent" />
+                        <span className="h-1 w-1 rounded-full bg-severity-high" />
+                        <span className="h-1 w-1 rounded-full bg-severity-medium" />
+                        <span className="h-1 w-1 rounded-full bg-severity-medium" />
+                        <span className="h-1 w-1 rounded-full bg-severity-low" />
+                      </div>
+                      <p className="mono text-[10px] uppercase tracking-[0.14em] text-fg-subtle">
+                        05 of 11 →
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────────
+          3 · TRUST — no logos. Just text-credentials, hairline.
+          ────────────────────────────────────────────────────────────── */}
+      <section className="border-t border-border bg-bg">
+        <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
+          <p className="eyebrow text-fg-subtle">Built for</p>
+          <div className="mt-6 grid gap-x-12 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { label: "Avg analysis time", value: "< 60s", unit: "" },
-              { label: "Concern levels", value: "5", unit: "tiers" },
-              { label: "Confidence levels", value: "4", unit: "tiers" },
-              { label: "Report sections", value: "6", unit: "" },
-            ].map((m) => (
-              <div key={m.label} className="bg-bg-dark px-6 py-6 lg:px-8 lg:py-8">
-                <p className="eyebrow text-fg-on-dark-subtle">{m.label}</p>
-                <p className="mt-3 mono text-2xl font-medium text-fg-on-dark">
-                  {m.value}
-                  {m.unit && (
-                    <span className="ml-2 text-sm font-normal text-fg-on-dark-muted">
-                      {m.unit}
-                    </span>
-                  )}
-                </p>
+              "IICRC-certified contractors",
+              "Public adjusters",
+              "Insurance estimators",
+              "Property attorneys",
+            ].map((role) => (
+              <p key={role} className="text-base font-medium text-fg">
+                {role}
+              </p>
+            ))}
+          </div>
+          <div className="mt-12 grid gap-x-12 gap-y-6 border-t border-border pt-8 text-sm text-fg-muted sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { k: "Standards", v: "IICRC S500 / S520 referenced" },
+              { k: "Format", v: "Xactimate-compatible PDF" },
+              { k: "Vision", v: "Photo evidence analysis" },
+              { k: "Output", v: "Severity + confidence per finding" },
+            ].map((row) => (
+              <div key={row.k}>
+                <p className="eyebrow text-fg-subtle">{row.k}</p>
+                <p className="mt-2 text-fg">{row.v}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 2. PROBLEM */}
-      <section className="bg-bg">
-        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <p className="eyebrow text-accent">The problem</p>
-              <h2 className="display mt-6 text-4xl leading-[1.05] sm:text-5xl">
-                Most policyholders don&apos;t know what&apos;s missing.
-              </h2>
-            </div>
-            <div className="lg:col-span-7">
-              <p className="text-lg leading-relaxed text-fg-muted">
-                Carrier estimates are dense — abbreviations, depreciation
-                tables, line-item logic that the average homeowner, and even
-                many contractors, never see in any other context. Important
-                scope can quietly go missing without anyone noticing until
-                it&apos;s too late to negotiate.
-              </p>
-              <p className="mt-5 text-base leading-relaxed text-fg-muted">
-                Things that commonly fall off an estimate:
-              </p>
-              <ul className="mt-6 grid gap-x-10 gap-y-3 text-sm text-fg sm:grid-cols-2">
-                {[
-                  "Flooring continuity across rooms",
-                  "Baseboard detach/reset and repaint",
-                  "Insulation, drywall, texture, paint blending",
-                  "Mitigation charges and equipment days",
-                  "Mold remediation scope",
-                  "HVAC cleaning",
-                  "Pack-out / contents handling",
-                  "Code-related work",
-                  "Supervision, protection, final cleaning",
-                  "Quantity differences and waste factors",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 h-px w-3 flex-none bg-accent"
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. HOW IT WORKS */}
-      <section id="how-it-works" className="border-t border-border bg-bg-subtle">
-        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="eyebrow text-accent">How it works</p>
-              <h2 className="display mt-6 text-4xl leading-[1.05] sm:text-5xl">
-                Four steps. No guesswork.
-              </h2>
-            </div>
-            <p className="max-w-md text-sm text-fg-muted">
-              Upload what you have. The more documents you include, the more
-              your report can be tied directly to evidence — and the fewer
-              findings will be marked <span className="font-medium text-fg">needs verification</span>.
-            </p>
-          </div>
+      {/* ──────────────────────────────────────────────────────────────
+          4 · WORKFLOW — UPLOAD / ANALYZE / REVIEW / EXPORT
+          ────────────────────────────────────────────────────────────── */}
+      <section className="border-t border-border bg-bg-subtle">
+        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-28">
+          <p className="eyebrow text-accent">Workflow</p>
+          <h2 className="display mt-6 max-w-3xl text-4xl leading-[1.05] sm:text-5xl">
+            Four steps from documents to a defensible report.
+          </h2>
 
           <ol className="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {howItWorks.map((step) => (
-              <li key={step.n} className="bg-bg p-8">
-                <p className="mono text-sm text-accent">{step.n}</p>
-                <p className="mt-6 text-lg font-medium tracking-tight text-fg">
-                  {step.title}
+            {[
+              {
+                k: "01",
+                t: "Upload",
+                d: "Carrier estimate, contractor estimate, photos, policy, denial letter, mitigation invoice.",
+              },
+              {
+                k: "02",
+                t: "Analyze",
+                d: "Senior-estimator-level reasoning — line-item logic, quantities, sequencing, carrier-consistency cross-checks.",
+              },
+              {
+                k: "03",
+                t: "Review",
+                d: "Severity-ranked findings tied to specific documents. Confidence levels on every claim.",
+              },
+              {
+                k: "04",
+                t: "Export",
+                d: "Clean PDF report you can share with the carrier, contractor, or licensed claim professional.",
+              },
+            ].map((s) => (
+              <li key={s.k} className="bg-bg p-8">
+                <p className="mono text-sm text-accent">{s.k}</p>
+                <p className="mt-6 text-xl font-medium tracking-tight text-fg">
+                  {s.t}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-fg-muted">
-                  {step.body}
+                  {s.d}
                 </p>
               </li>
             ))}
@@ -278,32 +399,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. FEATURES */}
+      {/* ──────────────────────────────────────────────────────────────
+          5 · FINDING TYPES — forensic vocabulary, hairline grid
+          ────────────────────────────────────────────────────────────── */}
       <section className="border-t border-border bg-bg">
         <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <p className="eyebrow text-accent">What it does</p>
+            <div className="lg:col-span-4">
+              <p className="eyebrow text-accent">What Vvon™ catches</p>
               <h2 className="display mt-6 text-4xl leading-[1.05] sm:text-5xl">
-                From confusing estimate to clear claim insight.
+                Eight forensic lenses, applied to every file.
               </h2>
-              <p className="mt-6 max-w-md text-base leading-relaxed text-fg-muted">
-                Carrier estimates often use complex line items, abbreviations,
-                depreciation tables and limited explanations. Vvon™ organizes
-                the information into a clear, evidence-based report so you
-                understand what was included, what may be missing, and what
-                questions to ask next.
+              <p className="mt-6 max-w-sm text-base leading-relaxed text-fg-muted">
+                Each lens reads the documents for a specific class of
+                issue. Every finding cites the source document and is
+                rated for evidentiary confidence.
               </p>
             </div>
-
-            <ul className="grid gap-px border border-border bg-border lg:col-span-7 sm:grid-cols-2">
-              {features.map((f) => (
-                <li key={f.title} className="bg-bg p-7">
-                  <p className="text-base font-medium tracking-tight text-fg">
-                    {f.title}
-                  </p>
+            <ul className="grid gap-px border border-border bg-border lg:col-span-8 sm:grid-cols-2">
+              {findingTypes.map((f) => (
+                <li key={f.title} className="bg-bg p-6">
+                  <p className="text-base font-medium text-fg">{f.title}</p>
                   <p className="mt-3 text-sm leading-relaxed text-fg-muted">
-                    {f.body}
+                    {f.detail}
                   </p>
                 </li>
               ))}
@@ -312,77 +430,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. ANALYSIS CATEGORIES */}
-      <section className="border-t border-border bg-bg-subtle">
-        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <p className="eyebrow text-accent">Analysis categories</p>
-              <h2 className="display mt-6 text-4xl leading-[1.05] sm:text-5xl">
-                What Vvon™ looks at.
-              </h2>
-              <p className="mt-6 max-w-sm text-base leading-relaxed text-fg-muted">
-                Every uploaded document is read against four lenses — the
-                repair scope, the mitigation scope, the estimate logic, and
-                the claim documents themselves.
-              </p>
-            </div>
-
-            <div className="grid gap-px border border-border bg-border lg:col-span-8 sm:grid-cols-2">
-              {categories.map((cat) => (
-                <div key={cat.title} className="bg-bg p-7">
-                  <p className="text-base font-medium tracking-tight text-fg">
-                    {cat.title}
-                  </p>
-                  <ul className="mt-5 flex flex-wrap gap-1.5">
-                    {cat.items.map((item) => (
-                      <li
-                        key={item}
-                        className="mono border border-border px-2 py-1 text-[11px] text-fg-muted"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. SAMPLE REPORT POINTER */}
-      <section className="border-t border-border bg-bg">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-          <Link
-            href="/report"
-            className="group block border border-border bg-bg p-10 transition hover:border-accent lg:p-14"
-          >
-            <div className="grid gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-8">
-                <p className="eyebrow text-accent">Sample report</p>
-                <h2 className="display mt-5 text-3xl leading-tight sm:text-4xl">
-                  Want to see what the output looks like first?
-                </h2>
-                <p className="mt-5 max-w-xl text-base leading-relaxed text-fg-muted">
-                  Open a generic Vvon™ sample report — no signup, no upload.
-                  Severity-ranked findings, possible missing scope,
-                  inconsistencies, clarification requests, and a
-                  documentation checklist.
-                </p>
-              </div>
-              <div className="flex items-end lg:col-span-4 lg:justify-end">
-                <span className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.16em] text-fg transition group-hover:gap-4 group-hover:text-accent">
-                  Open sample
-                  <span aria-hidden="true">→</span>
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      {/* 7. FAQ */}
+      {/* ──────────────────────────────────────────────────────────────
+          6 · FAQ
+          ────────────────────────────────────────────────────────────── */}
       <section className="border-t border-border bg-bg-subtle">
         <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12">
@@ -420,26 +470,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. FINAL CTA — dark band */}
-      <section className="relative overflow-hidden border-t border-border bg-bg-dark text-fg-on-dark">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-32 h-[500px] w-[500px] bg-[radial-gradient(circle,rgba(79,70,229,0.16)_0%,rgba(79,70,229,0)_60%)]"
-        />
-        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
+      {/* ──────────────────────────────────────────────────────────────
+          7 · FINAL CTA — dark, minimal, single action
+          ────────────────────────────────────────────────────────────── */}
+      <section className="border-t border-border bg-bg-dark text-fg-on-dark">
+        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <p className="eyebrow text-accent-fade">Try it</p>
+            <div className="lg:col-span-8">
+              <p className="eyebrow text-accent-fade">Begin</p>
               <h2 className="display mt-6 text-4xl leading-[1.05] sm:text-5xl">
                 Run your claim through Vvon™.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-fg-on-dark-muted">
-                Upload your insurance estimate and related documents. Get a
-                structured forensic report on possible missing scope,
-                inconsistencies and documentation gaps — in under a minute.
+                Upload the file. Get a forensic report in under a
+                minute. Informational analysis — not legal advice, not
+                public adjusting, not a guarantee of settlement.
               </p>
             </div>
-            <div className="flex flex-col items-start gap-4 lg:col-span-5 lg:items-end lg:justify-end">
+            <div className="flex flex-col items-start gap-4 lg:col-span-4 lg:items-end lg:justify-end">
               <Link
                 href="/upload"
                 className="inline-flex items-center gap-3 border border-accent bg-accent px-7 py-4 text-xs font-medium uppercase tracking-[0.16em] text-fg-on-dark transition hover:bg-accent-hover"
@@ -451,7 +499,7 @@ export default function HomePage() {
                 href="/pricing"
                 className="text-xs uppercase tracking-[0.16em] text-fg-on-dark-muted transition hover:text-fg-on-dark"
               >
-                See pricing →
+                Pricing →
               </Link>
             </div>
           </div>
@@ -462,7 +510,7 @@ export default function HomePage() {
         data={[
           softwareApplicationJsonLd(),
           websiteJsonLd(),
-          faqJsonLd(faqs.map((f) => ({ q: f.q, a: f.a }))),
+          faqJsonLd(faqs),
         ]}
       />
     </>
