@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { site } from "@/lib/site";
-import { inter, jetbrainsMono } from "./fonts";
+import { inter, jetbrainsMono, fraunces } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -61,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-US"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
     >
       <body className="min-h-screen bg-bg font-sans text-fg antialiased">
         <a

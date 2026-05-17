@@ -1,15 +1,14 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Fraunces } from "next/font/google";
 
-// Forensic Indigo design system uses two fonts:
+// Fonts used across vvon.ai.
 //
-//   - Inter Variable for everything text. Industry-standard for modern
-//     AI tools (Anthropic, Linear, Vercel, Stripe). Excellent at small
-//     sizes, good display rendering, deep weight range.
-//
-//   - JetBrains Mono for numeric data and IDs — claim IDs, finding
-//     counts, prices, severity badges, technical metadata.
-//
-// Both load via next/font/google, no CSS imports needed.
+//   Inter           — primary sans, body and display in production
+//                     "Forensic Indigo" design.
+//   JetBrains Mono  — numeric data, IDs, severity badges.
+//   Fraunces        — modern variable serif used only on the
+//                     /preview/editorial showcase page. Big-name
+//                     editorial sites like Anthropic use a similar
+//                     Tiempos-ish serif for display headings.
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -23,4 +22,14 @@ export const jetbrainsMono = JetBrains_Mono({
   display: "swap",
   variable: "--font-jetbrains-mono",
   weight: ["400", "500", "600"],
+});
+
+export const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fraunces",
+  // Variable font — full weight range exposed (300-900).
+  weight: "variable",
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT"],
 });
