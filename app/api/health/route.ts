@@ -14,7 +14,7 @@ export function GET() {
   return Response.json(
     {
       ok: true,
-      service: "onarestore",
+      service: "vvon",
       time: new Date().toISOString(),
       // Surface whether the AI is in real or mock mode without exposing
       // the key itself — useful for spotting "production is in mock mode"
