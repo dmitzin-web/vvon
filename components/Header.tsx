@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { site } from "@/lib/site";
 import { HeaderAuth } from "./HeaderAuth";
 
-// Vvon header — B2B enterprise SaaS layout.
-//
-// Layout: wide hairline-bordered bar. Two-line stacked wordmark on the
-// left (VVON / CLAIMLENS), full primary nav in the center, LOG IN +
-// REQUEST A DEMO solid indigo CTA on the right.
+// Vvon header — single wordmark, primary trial CTA, secondary demo link.
+// Hairline-bordered sticky bar. Sub-brand ("ClaimLens") deliberately
+// dropped — Vvon is the only brand.
 
 const nav = [
   { href: "/product", label: "Product" },
@@ -18,23 +17,25 @@ const nav = [
   { href: "/pricing", label: "Pricing" },
 ];
 
+const demoMailto = `mailto:${site.email}?subject=${encodeURIComponent(
+  "Vvon demo request",
+)}`;
+
 export function Header() {
   const pathname = usePathname() ?? "/";
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-5 lg:px-10">
-        {/* Stacked wordmark: VVON / CLAIMLENS */}
-        <Link href="/" aria-label="Vvon home" className="group inline-flex">
-          <div className="flex flex-col leading-none">
-            <span className="text-2xl font-semibold tracking-tight text-fg group-hover:opacity-80">
-              VVON
-              <sup className="ml-0.5 text-[0.4em] font-medium text-fg-muted">™</sup>
-            </span>
-            <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.42em] text-accent">
-              ClaimLens
-            </span>
-          </div>
+        <Link
+          href="/"
+          aria-label="Vvon home"
+          className="group inline-flex items-baseline gap-0.5"
+        >
+          <span className="text-2xl font-semibold tracking-[-0.04em] text-fg transition group-hover:opacity-80">
+            VVON
+          </span>
+          <sup className="text-[0.55em] font-medium text-fg-muted">™</sup>
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">
@@ -65,15 +66,21 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
           <div className="hidden sm:block">
             <HeaderAuth tone="light" />
           </div>
+          <a
+            href={demoMailto}
+            className="hidden text-xs font-medium uppercase tracking-[0.16em] text-fg-muted transition hover:text-fg md:inline-flex"
+          >
+            Book a demo
+          </a>
           <Link
-            href="/demo"
+            href="/login"
             className="inline-flex items-center gap-2 border border-accent bg-accent px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-fg-on-dark transition hover:bg-accent-hover"
           >
-            Request a demo
+            Start free trial
           </Link>
         </div>
       </div>

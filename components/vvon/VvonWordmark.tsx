@@ -11,10 +11,10 @@ export function VvonWordmark({
 }) {
   const toneClass =
     tone === "dark"
-      ? "text-charcoal"
+      ? "text-fg"
       : tone === "gold"
-        ? "text-gold"
-        : "text-ivory";
+        ? "text-accent"
+        : "text-fg-on-dark";
   return (
     <span className={`${toneClass} ${className}`}>
       {vvon.name}

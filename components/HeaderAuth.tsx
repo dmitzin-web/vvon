@@ -36,8 +36,8 @@ export function HeaderAuth({ tone = "dark" }: { tone?: "dark" | "light" }) {
 
   const linkClass =
     tone === "dark"
-      ? "text-ivory/70 transition hover:text-ivory"
-      : "text-charcoal/70 transition hover:text-charcoal";
+      ? "text-fg-on-dark/70 transition hover:text-fg-on-dark"
+      : "text-fg-muted transition hover:text-fg";
 
   if (!email) {
     return (
